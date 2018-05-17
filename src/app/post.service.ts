@@ -51,7 +51,7 @@ export class PostService {
     if (response.hits == null || response.hits.total == 0) {
       return items;
     }
-    for (let i = 0; i < response.hits.total; i++) {
+    for (let i = 0; i < response.hits.hits.length; i++) {
       items.push(this.processBook(response.hits.hits[i]));
     }
     return items;
