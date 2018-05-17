@@ -1,0 +1,11 @@
+<ul class="">
+			<li *ngFor="let post of posts"  (click)="onSelect(post)">
+				<a href="http://bbs.skykiwi.com/forum.php?mod=viewthread&tid={{post.id}}" target="_blank">{{post.id}}</a>
+				<a ng-click="userPosts(authorId)">{{post.author}}</a>
+				<span>{{post.type}}</span>
+				<span>{{post.pdate}}</span>
+				<p>{{post.title}}</p>
+				
+				<span ng-bind-html="content"></span>
+			</li>
+</ul>
