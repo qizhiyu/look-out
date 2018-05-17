@@ -11,7 +11,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class PostService {
   private url = 'http://zyq.westus2.cloudapp.azure.com:9200/sky2/post/_search';
-  private request = { "size": 50, "sort": [{ "id": "desc" }], "query": { "multi_match": { "type": "most_fields", "query": "apple", "fields": ["title.cn", "content.cn"] } } };
+  private request = {
+    "size": 10,
+    "sort": [{ "id": "desc" }], "query": { "multi_match": { "type": "most_fields", "query": "apple", "fields": ["title.cn", "content.cn"] } }
+  };
 
   constructor(private http: HttpClient,
     private messageService: MessageService) { }
@@ -31,7 +34,7 @@ export class PostService {
 
     var source = item._source;
     post.id = source.id;
-    post.published = source.published;
+    post.published = source.pdate;
     post.authorId = source.authorId;
     post.author = source.author;
     post.type = source.type;
@@ -39,7 +42,6 @@ export class PostService {
 
     var content = (source.content == null) ? '' : source.content.replace('.pcb{margin-right:0}', '');
     post.content = content;
-    //				source.content = $sce.trustAsHtml(content);
     return post;
   }
 
