@@ -1,6 +1,6 @@
 export class Post {
   id: number;
-  //published: Date;
+  published: Date;
   authorId: number;
   author: string;
   content: string;
