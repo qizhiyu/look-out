@@ -9,10 +9,6 @@ import { PostService } from '../post.service';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  post: Post = {
-    id: 1,
-    author: 'Andy'
-  };
   posts:Post[];
   
   constructor(private postService: PostService) { }
@@ -22,8 +18,8 @@ export class PostsComponent implements OnInit {
   }
 	selectedPost: Post;
 	
-	onSelect(Post: Post): void {
-	  this.selectedPost = Post;
+	onSelect(post: Post): void {
+	  this.selectedPost = post;
 	}
 	
 	getPosts(): void {
