@@ -1,4 +1,4 @@
 import { Post } from './post';
 export const POSTS: Post[] = [
-	new Post()
+  { title: 'Test', author:'Test', authorId:1 } as Post
 ];

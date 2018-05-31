@@ -9,21 +9,21 @@ import { PostService } from '../post.service';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  posts:Post[];
-  
+  posts: Post[];
+
   constructor(private postService: PostService) { }
 
   ngOnInit() {
-  	this.getPosts();
+    this.getPosts();
   }
-	selectedPost: Post;
-	
-	onSelect(post: Post): void {
-	  this.selectedPost = post;
-	}
-	
-	getPosts(): void {
-	this.postService.getPosts()
-        .subscribe(posts => this.posts = posts);
-}
+  selectedPost: Post;
+
+  onSelect(post: Post): void {
+    this.selectedPost = post;
+  }
+
+  getPosts(): void {
+    //TODO: can it be async?
+    this.postService.getPostsAsync().then(posts => this.posts = posts);
+  }
 }

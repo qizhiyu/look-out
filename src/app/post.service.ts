@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { race } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -58,14 +59,17 @@ export class PostService {
   }
 
   getPosts(): Observable<Post[]> {
-
-    //return of(POSTS);
     return this.search()
       .pipe(
       map(data => this.convert(data)),
       tap(data => this.log('fetched posts')),
       catchError(this.handleError('getPosts', []))
       );
+  }
+
+  async getPostsAsync(): Promise< Post[]> {
+    var raw = await this.search().toPromise();
+    return this.convert(raw);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
